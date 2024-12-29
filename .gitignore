@@ -1,2 +1,5 @@
 /mobile/node_modules/
 /api/node_modules/
+
+/mobile/package-lock.json
+/api/package-lock.json
