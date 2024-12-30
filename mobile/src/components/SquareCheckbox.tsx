@@ -1,6 +1,6 @@
-import { Check } from "phosphor-react-native";
 import React from "react";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity } from "react-native";
+import { Check } from "phosphor-react-native";
 
 interface SquareCheckboxProps {
   checked?: boolean;

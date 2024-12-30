@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
+import { View, TouchableOpacity } from "react-native";
 import { ArrowArcLeft, PencilSimpleLine } from "phosphor-react-native";
 
 type Props = {

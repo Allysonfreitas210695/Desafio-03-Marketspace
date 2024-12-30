@@ -19,42 +19,34 @@ import {
 
 import { AppNavigatorRoutesProps } from "src/routes/app.routes";
 
-import { ProductDetailsDTO, ProductDTO } from "src/dtos/ProductDTO";
+import { api } from "src/services/api";
+
+import { useAuth } from "src/hooks/useAuth";
+
+import { ProductDetailsDTO } from "src/dtos/ProductDTO";
 
 import { HeaderDetails } from "src/components/HeaderDetails";
 import ImageCarousel from "src/components/ImageCarousel";
 import { Button } from "src/components/Button";
+import { Loading } from "src/components/Loading";
 
 type ParamsProps = {
   id: string;
   showContact?: boolean;
 };
 
-import { api } from "src/services/api";
-import { Loading } from "src/components/Loading";
-
-import { useAuth } from "src/hooks/useAuth";
-
 export default function DetailsMyProduct() {
-  const [loading, setLoading] = useState(false);
-
   const { user } = useAuth();
+
+  const [loading, setLoading] = useState(false);
+  const [product, setProduct] = useState<ProductDetailsDTO | null>(null);
 
   const router = useRoute();
   const { id, showContact } = router.params as ParamsProps;
+
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
-  const [product, setProduct] = useState<ProductDetailsDTO | null>(null);
-
   if (!id) navigation.goBack();
-
-  const paymentOptions = [
-    { key: "boleto", value: "Boleto" },
-    { key: "pix", value: "Pix" },
-    { key: "cash", value: "Dinheiro" },
-    { key: "card", value: "Cartão de Crédito" },
-    { key: "deposit", value: "Depósito Bancário" },
-  ];
 
   function handleGoBack() {
     navigation.navigate("myProducts");
@@ -190,33 +182,31 @@ export default function DetailsMyProduct() {
 
               <View className="flex-row gap-2 mt-2">
                 {product.payment_methods.map((paymentMethod, index) => {
-                  const paymentOption = paymentOptions.find(
-                    (option) => option.key === paymentMethod.key
-                  );
-
                   return (
-                    paymentOption && (
-                      <View key={index} className="flex-row items-center">
-                        {paymentMethod.key === "boleto" && (
-                          <Barcode size={20} color="#1A181B" />
-                        )}
-                        {paymentMethod.key === "pix" && (
-                          <QrCode size={20} color="#1A181B" />
-                        )}
-                        {paymentMethod.key === "deposit" && (
-                          <NoteBlank size={20} color="#1A181B" />
-                        )}
-                        {paymentMethod.key === "cash" && (
-                          <NoteBlank size={20} color="#1A181B" />
-                        )}
-                        {paymentMethod.key === "card" && (
-                          <CreditCard size={20} color="#1A181B" />
-                        )}
-                        <Text className="text-sm font-regular text-gray-200 ml-1">
-                          {paymentOption.value}
-                        </Text>
-                      </View>
-                    )
+                    <View key={index} className="flex-row items-center">
+                      {paymentMethod.key === "boleto" && (
+                        <Barcode size={20} color="#1A181B" />
+                      )}
+                      {paymentMethod.key === "pix" && (
+                        <QrCode size={20} color="#1A181B" />
+                      )}
+                      {paymentMethod.key === "deposit" && (
+                        <NoteBlank size={20} color="#1A181B" />
+                      )}
+                      {paymentMethod.key === "cash" && (
+                        <NoteBlank size={20} color="#1A181B" />
+                      )}
+                      {paymentMethod.key === "card" && (
+                        <CreditCard size={20} color="#1A181B" />
+                      )}
+                      <Text className="text-sm font-regular text-gray-200 ml-1">
+                        {paymentMethod.key === "boleto" && "Boleto"}
+                        {paymentMethod.key === "pix" && "Pix"}
+                        {paymentMethod.key === "cash" && "Dinheiro"}
+                        {paymentMethod.key === "card" && "Cartão de Crédit"}
+                        {paymentMethod.key === "deposit" && "Depósito Bancário"}
+                      </Text>
+                    </View>
                   );
                 })}
               </View>

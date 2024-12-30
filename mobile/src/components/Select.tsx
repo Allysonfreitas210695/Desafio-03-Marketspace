@@ -1,5 +1,4 @@
 import { Picker } from "@react-native-picker/picker";
-import { useState } from "react";
 import { Text, View } from "react-native";
 
 type Props = {

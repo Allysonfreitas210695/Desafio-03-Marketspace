@@ -18,7 +18,6 @@ type Props = TouchableOpacityProps & {
 export function Button({
   title,
   variant = "dark",
-  onPress,
   showIcon = false,
   disabled = false,
   icon,
@@ -27,7 +26,6 @@ export function Button({
   return (
     <TouchableOpacity
       className="w-full h-[48] rounded-md"
-      onPress={onPress}
       activeOpacity={0.7}
       disabled={disabled}
       {...rest}

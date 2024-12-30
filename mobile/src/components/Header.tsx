@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, Image } from "react-native";
 import { Plus } from "phosphor-react-native";
+
+import { useAuth } from "src/hooks/useAuth";
 
 import { api } from "src/services/api";
 
 import { Button } from "./Button";
-import { useAuth } from "src/hooks/useAuth";
 
 type Props = {
   onPress: () => void;

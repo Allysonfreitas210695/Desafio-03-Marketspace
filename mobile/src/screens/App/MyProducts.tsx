@@ -4,29 +4,26 @@ import { Plus } from "phosphor-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
-import Select from "src/components/Select";
-import { Products } from "src/components/Products";
-import { Loading } from "src/components/Loading";
-
 import { AppNavigatorRoutesProps } from "src/routes/app.routes";
 import { api } from "src/services/api";
 
 import { ProductMyProps } from "src/dtos/ProductDTO";
 
+import Select from "src/components/Select";
+import { Products } from "src/components/Products";
+import { Loading } from "src/components/Loading";
+
 export default function MyProducts() {
   const [loading, setLoading] = useState(false);
-
   const [products, setProducts] = useState<ProductMyProps[]>([]);
-
   const [filteredProducts, setFilteredProducts] = useState<ProductMyProps[]>(
     []
   );
-
   const [selected, setSelected] = useState("Todos");
 
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
-  async function fecthMyProducts() {
+  async function fetchMyProducts() {
     try {
       setLoading(true);
       const { data } = await api.get("/users/products");
@@ -40,7 +37,7 @@ export default function MyProducts() {
 
   useFocusEffect(
     useCallback(() => {
-      fecthMyProducts();
+      fetchMyProducts();
     }, [])
   );
 

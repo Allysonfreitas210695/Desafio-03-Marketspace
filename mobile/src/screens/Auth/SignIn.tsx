@@ -8,14 +8,14 @@ import * as Yup from "yup";
 
 import LogoImg from "@assets/Logo.png";
 
+import { AuthNavigatorRoutesProps } from "src/routes/auth.routes";
+
+import { useAuth } from "src/hooks/useAuth";
+
 import { Loading } from "src/components/Loading";
 import { CustomAlertModal } from "src/components/CustomAlertModal";
 import { Button } from "src/components/Button";
 import { Input } from "src/components/Input";
-
-import { AuthNavigatorRoutesProps } from "src/routes/auth.routes";
-
-import { useAuth } from "src/hooks/useAuth";
 
 const signInSchema = Yup.object().shape({
   email: Yup.string()
@@ -33,10 +33,13 @@ type FormDataProps = {
 };
 
 export default function SignIn() {
-  const [loading, setLoading] = useState(false);
+  const { singIn } = useAuth();
 
+  const [loading, setLoading] = useState(false);
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+
+  const navigation = useNavigation<AuthNavigatorRoutesProps>();
 
   const {
     control,
@@ -47,10 +50,6 @@ export default function SignIn() {
     defaultValues: { email: "", password: "" },
     mode: "all",
   });
-
-  const { singIn } = useAuth();
-
-  const navigation = useNavigation<AuthNavigatorRoutesProps>();
 
   function handleCreateAccount() {
     navigation.navigate("signUp");

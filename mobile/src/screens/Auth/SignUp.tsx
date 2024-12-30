@@ -2,27 +2,24 @@ import React, { useState } from "react";
 import { View, Text, Image, ScrollView, Pressable } from "react-native";
 import { PencilSimpleLine, User } from "phosphor-react-native";
 import { useNavigation } from "@react-navigation/native";
-
-import * as ImagePicker from "expo-image-picker";
-import * as FileSystem from "expo-file-system";
-
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useForm, Controller } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import * as ImagePicker from "expo-image-picker";
+import * as FileSystem from "expo-file-system";
 
-import { SafeAreaView } from "react-native-safe-area-context";
+import { api } from "src/services/api";
+
+import { useAuth } from "src/hooks/useAuth";
 
 import LogoImg from "@assets/Logo.png";
 
 import { Input } from "src/components/Input";
 import { Button } from "src/components/Button";
+import { CustomAlertModal } from "src/components/CustomAlertModal";
 
 import { AuthNavigatorRoutesProps } from "src/routes/auth.routes";
-
-import { api } from "src/services/api";
-
-import { useAuth } from "src/hooks/useAuth";
-import { CustomAlertModal } from "src/components/CustomAlertModal";
 
 const signUpSchema = Yup.object().shape({
   name: Yup.string().required("O nome é obrigatório"),
@@ -51,13 +48,12 @@ interface UriProps {
 }
 
 export default function SignUp() {
-  const [avatar, setAvatar] = useState<UriProps | null>(null);
-  const [loading, setLoading] = useState(false);
+  const { singIn } = useAuth();
 
+  const [loading, setLoading] = useState(false);
+  const [avatar, setAvatar] = useState<UriProps | null>(null);
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-
-  const { singIn } = useAuth();
 
   const {
     control,

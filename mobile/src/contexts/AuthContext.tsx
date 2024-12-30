@@ -69,7 +69,6 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         userAndTokenUpdate(data.user, data.token);
       }
     } catch (error) {
-      console.log(error);
       throw error;
     } finally {
       setIsLoadingUserStorageData(false);
@@ -79,7 +78,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   async function signOut() {
     try {
       setIsLoadingUserStorageData(true);
-      setUser({} as UserDTO);
+      setUser(null);
       await storageUserRemove();
       await storageAuthTokenRemove();
     } catch (error) {

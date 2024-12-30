@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Image, Pressable, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";

@@ -1,14 +1,6 @@
 import { View, Text, Image, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-
-import { api } from "src/services/api";
-
-import { useAuth } from "src/hooks/useAuth";
-
-import { ProductDTO } from "src/dtos/ProductDTO";
-
-import ImageCarousel from "src/components/ImageCarousel";
 import {
   ArrowLeft,
   Barcode,
@@ -17,8 +9,17 @@ import {
   NoteBlank,
   QrCode,
 } from "phosphor-react-native";
-import { Button } from "src/components/Button";
+
+import { api } from "src/services/api";
+
+import { useAuth } from "src/hooks/useAuth";
+
 import { AppNavigatorRoutesProps } from "src/routes/app.routes";
+
+import { ProductDTO } from "src/dtos/ProductDTO";
+
+import ImageCarousel from "src/components/ImageCarousel";
+import { Button } from "src/components/Button";
 import { Loading } from "src/components/Loading";
 
 type ParamsProps = {
@@ -27,9 +28,10 @@ type ParamsProps = {
 };
 
 export default function PreviewProduct() {
+  const { user } = useAuth();
+
   const [loading, setLoading] = useState(false);
 
-  const { user } = useAuth();
   const router = useRoute();
 
   const navigation = useNavigation<AppNavigatorRoutesProps>();
@@ -38,13 +40,7 @@ export default function PreviewProduct() {
 
   const imageObjects = images.map((image) => ({ uri: image }));
 
-  const paymentMethodIcons: Record<string, JSX.Element> = {
-    boleto: <Barcode size={20} color="#1A181B" />,
-    pix: <QrCode size={20} color="#1A181B" />,
-    deposit: <NoteBlank size={20} color="#1A181B" />,
-    cash: <NoteBlank size={20} color="#1A181B" />,
-    card: <CreditCard size={20} color="#1A181B" />,
-  };
+  const paymentMethodIcons: Record<string, JSX.Element> = {};
 
   async function handleSubmitProduct() {
     try {
@@ -80,8 +76,6 @@ export default function PreviewProduct() {
             "Content-Type": "multipart/form-data",
           },
         });
-
-        console.log("Imagens enviadas:", response.data);
       }
       navigation.goBack();
     } catch (error) {
@@ -121,7 +115,7 @@ export default function PreviewProduct() {
               source={{
                 uri: user?.avatar
                   ? `${api.defaults.baseURL}/images/${user.avatar}`
-                  : "https://via.placeholder.com/45", // Placeholder caso não tenha avatar
+                  : "https://via.placeholder.com/45",
               }}
               style={{ width: "100%", height: "100%", borderRadius: 50 }}
               alt="imagem do perfil"
@@ -171,22 +165,17 @@ export default function PreviewProduct() {
           </Text>
 
           {product.payment_methods.map((paymentMethod) => {
-            const icon =
-              paymentMethodIcons[
-                paymentMethod as keyof typeof paymentMethodIcons
-              ];
             return (
               <View
                 key={paymentMethod}
                 className="flex-row gap-2 mt-2 items-center"
               >
-                {icon || (
-                  <Text className="text-sm text-gray-300">
-                    Método desconhecido
-                  </Text>
-                )}
-                <Text className="text-sm font-regular text-gray-200">
-                  {paymentMethod}
+                <Text className="text-sm font-regular text-gray-200 ml-1">
+                  {paymentMethod === "boleto" && "Boleto"}
+                  {paymentMethod === "pix" && "Pix"}
+                  {paymentMethod === "cash" && "Dinheiro"}
+                  {paymentMethod === "card" && "Cartão de Crédit"}
+                  {paymentMethod === "deposit" && "Depósito Bancário"}
                 </Text>
               </View>
             );

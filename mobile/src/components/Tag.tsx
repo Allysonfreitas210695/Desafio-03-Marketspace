@@ -28,7 +28,7 @@ const Tag = ({ label, active = false, onToggle }: TagProps) => {
       {active && (
         <View
           className="ml-2 w-6 h-6 rounded-full bg-white justify-center items-center"
-          style={{ marginLeft: 8 }} // Ajusta o espaçamento do ícone
+          style={{ marginLeft: 8 }}
         >
           <X color="#647AC7" size={16} />
         </View>

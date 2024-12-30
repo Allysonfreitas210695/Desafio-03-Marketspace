@@ -7,19 +7,15 @@ import { AppNavigatorRoutesProps } from "src/routes/app.routes";
 import { api } from "src/services/api";
 
 export function Sell() {
-  const [loading, setLoading] = useState(false);
   const [amountMyProducts, setAmountMyProducts] = useState([]);
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
   async function fetchMyProducts() {
     try {
-      setLoading(true);
       const { data } = await api.get("/users/products");
       setAmountMyProducts(data);
     } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
+      setAmountMyProducts([]);
     }
   }
 

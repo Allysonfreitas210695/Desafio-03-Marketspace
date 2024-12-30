@@ -4,13 +4,14 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { House, FilePlus, SignOut } from "phosphor-react-native";
 
+import { useAuth } from "src/hooks/useAuth";
+
+import { ProductDTO } from "src/dtos/ProductDTO";
+
 import Home from "src/screens/App/Home";
 import MyProducts from "src/screens/App/MyProducts";
 import DetailsMyProduct from "src/screens/App/DetailsMyProduct";
 import NewCreateProduct from "src/screens/App/NewCreateProduct";
-
-import { useAuth } from "src/hooks/useAuth";
-import { ProductDTO } from "src/dtos/ProductDTO";
 import PreviewProduct from "src/screens/App/PreviewProduct";
 
 type AuthRoutes = {

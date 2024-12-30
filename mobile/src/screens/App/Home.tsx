@@ -36,7 +36,7 @@ export default function Home() {
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   const openBottomSheet = () => bottomSheetRef.current?.expand();
-  const handleCloseBottonSheet = () => bottomSheetRef.current?.collapse();
+  const handleCloseBottomSheet = () => bottomSheetRef.current?.collapse();
 
   const handleNewAds = () =>
     navigation.navigate("newCreateProduct", { product: null, images: [] });
@@ -67,7 +67,7 @@ export default function Home() {
 
   async function handleApplyFilters() {
     handleSearch();
-    handleCloseBottonSheet();
+    handleCloseBottomSheet();
   }
 
   const paymentOptions = [
@@ -143,7 +143,7 @@ export default function Home() {
             </Text>
             <TouchableOpacity
               className="p-1 mr-10"
-              onPress={handleCloseBottonSheet}
+              onPress={handleCloseBottomSheet}
             >
               <X size={20} color="#9F9BA1" />
             </TouchableOpacity>

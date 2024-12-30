@@ -12,6 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 import { AppNavigatorRoutesProps } from "src/routes/app.routes";
+
 import { Input } from "src/components/Input";
 import RoundedCheckbox from "src/components/RoundedCheckbox";
 import CheckedSwitch from "src/components/CheckedSwitch";
@@ -132,7 +133,6 @@ export default function NewCreateProduct() {
   useFocusEffect(
     useCallback(() => {
       if (product) {
-        console.log(product?.payment_methods);
         reset({
           title: product?.name,
           description: product?.description,

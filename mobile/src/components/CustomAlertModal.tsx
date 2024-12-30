@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Modal, Text, Animated, View, Dimensions } from "react-native";
+import React, { useEffect } from "react";
+import { Modal, Text, View, Dimensions } from "react-native";
 import { Button } from "./Button";
+import {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from "react-native-reanimated";
 
 type CustomAlertModalProps = {
   isVisible: boolean;
@@ -17,57 +22,66 @@ export function CustomAlertModal({
   message,
   onClose,
 }: CustomAlertModalProps) {
-  const [fadeAnim] = useState(new Animated.Value(0));
+  const fadeAnim = useSharedValue(0);
 
   useEffect(() => {
-    if (isVisible) {
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [isVisible, fadeAnim]);
+    fadeAnim.value = withTiming(isVisible ? 1 : 0, { duration: 300 });
+  }, [isVisible]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: fadeAnim.value,
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+  }));
 
   return (
     <Modal
       transparent={true}
       visible={isVisible}
-      animationType="fade"
+      animationType="none"
       onRequestClose={onClose}
     >
-      <Animated.View
-        className="flex-1 justify-center items-center"
-        style={[
-          { opacity: fadeAnim },
-          { backgroundColor: "rgba(0, 0, 0, 0.8)" },
-        ]}
-      >
-        <View
-          className="p-6 bg-white rounded-lg shadow-lg"
-          style={{
-            width: screenWidth - 40,
-            maxHeight: 300,
-          }}
-        >
-          <Text className="font-bold text-3xl text-center text-gray-800 mb-3">
-            {title}
-          </Text>
-          <Text className="text-xl text-gray-400 mb-6 text-center">
-            {message}
-          </Text>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <View style={{ ...animatedStyle }}>
+          <View
+            style={{
+              padding: 24,
+              backgroundColor: "white",
+              borderRadius: 10,
+              shadowColor: "#000",
+              shadowOpacity: 0.2,
+              shadowRadius: 5,
+              width: screenWidth - 40,
+              maxHeight: 300,
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 24,
+                textAlign: "center",
+                color: "#333",
+                marginBottom: 12,
+              }}
+            >
+              {title}
+            </Text>
+            <Text
+              style={{
+                fontSize: 18,
+                textAlign: "center",
+                color: "#777",
+                marginBottom: 24,
+              }}
+            >
+              {message}
+            </Text>
 
-          <View className="flex-row justify-center">
-            <Button title="Entendi" variant="warning" onPress={onClose} />
+            <View style={{ flexDirection: "row", justifyContent: "center" }}>
+              <Button title="Entendi" variant="warning" onPress={onClose} />
+            </View>
           </View>
         </View>
-      </Animated.View>
+      </View>
     </Modal>
   );
 }
