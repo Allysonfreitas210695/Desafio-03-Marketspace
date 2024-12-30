@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import { AppNavigatorRoutesProps } from "src/routes/app.routes";
+
 import { api } from "src/services/api";
 
 import { ProductMyProps } from "src/dtos/ProductDTO";

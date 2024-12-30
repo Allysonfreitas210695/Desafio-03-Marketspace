@@ -13,13 +13,14 @@ import * as Yup from "yup";
 
 import { AppNavigatorRoutesProps } from "src/routes/app.routes";
 
+import { ProductDTO } from "src/dtos/ProductDTO";
+
 import { Input } from "src/components/Input";
 import RoundedCheckbox from "src/components/RoundedCheckbox";
 import CheckedSwitch from "src/components/CheckedSwitch";
 import SquareCheckbox from "src/components/SquareCheckbox";
 import { ImagesProduct } from "src/components/ImagesProduct";
 import { Button } from "src/components/Button";
-import { ProductDTO } from "src/dtos/ProductDTO";
 import { CustomAlertModal } from "src/components/CustomAlertModal";
 
 const schema = Yup.object().shape({

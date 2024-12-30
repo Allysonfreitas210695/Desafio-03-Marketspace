@@ -1,14 +1,7 @@
 import { View, Text, Image, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import {
-  ArrowLeft,
-  Barcode,
-  CreditCard,
-  FilePlus,
-  NoteBlank,
-  QrCode,
-} from "phosphor-react-native";
+import { ArrowLeft, FilePlus } from "phosphor-react-native";
 
 import { api } from "src/services/api";
 

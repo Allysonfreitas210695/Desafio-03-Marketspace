@@ -5,6 +5,10 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 
+import { api } from "src/services/api";
+
+import { AppNavigatorRoutesProps } from "src/routes/app.routes";
+
 import { Header } from "src/components/Header";
 import { Sell } from "src/components/Sell";
 import { Products } from "src/components/Products";
@@ -13,9 +17,6 @@ import SquareCheckbox from "src/components/SquareCheckbox";
 import Tag from "src/components/Tag";
 import CheckedSwitch from "src/components/CheckedSwitch";
 import { Button } from "src/components/Button";
-
-import { AppNavigatorRoutesProps } from "src/routes/app.routes";
-import { api } from "src/services/api";
 
 type FormPropsQuery = {
   searchAnnouncement: string;

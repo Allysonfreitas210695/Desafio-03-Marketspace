@@ -7,7 +7,6 @@ import {
   useRoute,
 } from "@react-navigation/native";
 import {
-  Bank,
   Barcode,
   CreditCard,
   NoteBlank,
