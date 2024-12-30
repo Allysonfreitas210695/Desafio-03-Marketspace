@@ -5,18 +5,29 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { House, FilePlus, SignOut } from "phosphor-react-native";
 
 import Home from "src/screens/App/Home";
-import MyAds from "src/screens/App/MyAds";
-import NewCreateAds from "src/screens/App/NewCreateAds";
-import DetailsAds from "src/screens/App/DetailsAds";
+import MyProducts from "src/screens/App/MyProducts";
+import DetailsMyProduct from "src/screens/App/DetailsMyProduct";
+import NewCreateProduct from "src/screens/App/NewCreateProduct";
+
 import { useAuth } from "src/hooks/useAuth";
+import { ProductDTO } from "src/dtos/ProductDTO";
+import PreviewProduct from "src/screens/App/PreviewProduct";
 
 type AuthRoutes = {
   home: undefined;
-  myAds: undefined;
-  newCreateAds: undefined;
+  myProducts: undefined;
+  newCreateProduct: {
+    product: ProductDTO | null;
+    images: string[];
+  };
   logout: undefined;
-  detailsAds: {
+  detailsMyProduct: {
     id: string;
+    showContact?: boolean;
+  };
+  previewProduct: {
+    product: ProductDTO;
+    images: string[];
   };
 };
 
@@ -74,8 +85,8 @@ export default function AppRoutes() {
         }}
       />
       <Screen
-        name="myAds"
-        component={MyAds}
+        name="myProducts"
+        component={MyProducts}
         options={{
           tabBarIcon: ({ focused }) => (
             <FilePlus size={24} color={focused ? "#3E3A40" : "#9F9BA1"} />
@@ -92,7 +103,6 @@ export default function AppRoutes() {
               onPress={handleLogout}
               className="w-12 h-12 justify-center items-center "
             >
-              {" "}
               <SignOut size={24} color={"#E07878"} style={{ padding: 10 }} />
             </TouchableOpacity>
           ),
@@ -100,16 +110,23 @@ export default function AppRoutes() {
       />
 
       <Screen
-        name="newCreateAds"
-        component={NewCreateAds}
+        name="newCreateProduct"
+        component={NewCreateProduct}
         options={{
           tabBarItemStyle: { display: "none" },
         }}
       />
 
       <Screen
-        name="detailsAds"
-        component={DetailsAds}
+        name="detailsMyProduct"
+        component={DetailsMyProduct}
+        options={{
+          tabBarItemStyle: { display: "none" },
+        }}
+      />
+      <Screen
+        name="previewProduct"
+        component={PreviewProduct}
         options={{
           tabBarItemStyle: { display: "none" },
         }}

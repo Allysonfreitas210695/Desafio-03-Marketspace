@@ -8,10 +8,10 @@ import { Button } from "./Button";
 import { useAuth } from "src/hooks/useAuth";
 
 type Props = {
-  onPressBottomSheet: () => void;
+  onPress: () => void;
 };
 
-export function Header({ onPressBottomSheet }: Props) {
+export function Header({ onPress }: Props) {
   const { user } = useAuth();
 
   return (
@@ -40,7 +40,7 @@ export function Header({ onPressBottomSheet }: Props) {
           variant="dark"
           showIcon
           icon={<Plus size={16} color="#FFF" />}
-          onPress={() => onPressBottomSheet()}
+          onPress={onPress}
         />
       </View>
     </View>

@@ -87,8 +87,9 @@ export default function ImageCarousel({ images, isActive = false }: Props) {
               style={{
                 marginHorizontal: 5,
                 height: 3,
-                width: 120,
-                backgroundColor: idx === index ? "#555258" : "#F7F7F8",
+                width: width / images.length - 10,
+                borderRadius: 2,
+                backgroundColor: idx === index ? "#F7F7F8" : "#555258",
               }}
             ></View>
           ))}

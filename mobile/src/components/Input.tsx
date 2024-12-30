@@ -32,14 +32,14 @@ export function Input({
   return (
     <>
       <View
-        className={`w-full px-4 py-2 rounded-md bg-gray-700 flex-row justify-between items-center ${isFocused ? "border border-gray-300" : "border border-transparent"}`}
+        className={`w-full px-4 py-3 rounded-md bg-gray-700 flex-row justify-between items-center ${isFocused ? "border border-gray-300" : "border border-transparent"}`}
       >
         <TextInput
           {...rest}
           ref={inputRef}
           secureTextEntry={secureTextEntry && !showPassword}
           placeholderTextColor={"#9F9BA1"}
-          className="text-gray-100  flex-1 text-sm font-regular h-12"
+          className="text-gray-100 flex-1 text-sm font-regular h-12"
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         />

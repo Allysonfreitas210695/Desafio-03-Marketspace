@@ -3,6 +3,7 @@ import "react-native-gesture-handler";
 import React, { useEffect } from "react";
 import { StatusBar, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { LogBox } from "react-native";
 
 import {
   useFonts,
@@ -19,6 +20,8 @@ import { Routes } from "@routes";
 import { AuthContextProvider } from "src/contexts/AuthContext";
 
 SplashScreen.preventAutoHideAsync();
+
+LogBox.ignoreLogs(["Reading from `value` during component render"]);
 
 export default function App() {
   const [fontsLoaded] = useFonts({

@@ -97,7 +97,7 @@ export default function SignIn() {
           </View>
 
           <Text className="mb-4 text-lg font-regular text-gray-200">
-            Acesse sua conta{" "}
+            Acesse sua conta
           </Text>
 
           <View className="w-full mb-[68]">

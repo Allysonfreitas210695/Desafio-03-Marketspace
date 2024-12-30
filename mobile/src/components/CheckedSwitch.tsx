@@ -10,7 +10,7 @@ const CheckedSwitch = ({ checked = false, onToggle }: CheckedSwitchProps) => {
   return (
     <TouchableOpacity
       onPress={onToggle}
-      className={`flex-row items-center ${checked ? "bg-[#647AC7]" : "bg-gray-400"} w-12 h-6 rounded-full p-1 justify-between`}
+      className={`flex-row items-center ${checked ? "bg-[#647AC7]" : "bg-gray-500"} w-12 h-6 rounded-full p-1 justify-between`}
       style={{ position: "relative" }}
     >
       <View

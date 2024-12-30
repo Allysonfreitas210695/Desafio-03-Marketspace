@@ -2,20 +2,20 @@ import { View, FlatList, Pressable, Text } from "react-native";
 import React from "react";
 
 import { ProductItem } from "./Product-Item";
-import { ProductDTO } from "src/dtos/ProductDTO";
+import { ProductMyProps } from "src/dtos/ProductDTO";
 import { useNavigation } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "src/routes/app.routes";
 
 type Props = {
-  data: ProductDTO[];
-  showDetails?: boolean;
+  data: ProductMyProps[];
+  showContact?: boolean;
 };
 
-export function Products({ data, showDetails = false }: Props) {
+export function Products({ data, showContact = false }: Props) {
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
   function handleDetailsAds(id: string) {
-    navigation.navigate("detailsAds", { id });
+    navigation.navigate("detailsMyProduct", { id, showContact });
   }
 
   return (
@@ -44,9 +44,7 @@ export function Products({ data, showDetails = false }: Props) {
       renderItem={({ item }) => (
         <Pressable
           onPress={() => {
-            if (showDetails) {
-              handleDetailsAds(item.id);
-            }
+            handleDetailsAds(item.id);
           }}
           style={{
             width: "auto",
