@@ -118,7 +118,7 @@ export default function DetailsMyProduct() {
                         }))
                       : []
                   }
-                  isActive={true}
+                  isActive={product.is_active}
                 />
               </View>
             </View>
@@ -179,7 +179,7 @@ export default function DetailsMyProduct() {
                 Meios de pagamento:
               </Text>
 
-              <View className="flex-row gap-2 mt-2">
+              <View className="gap-2 mt-2">
                 {product.payment_methods.map((paymentMethod, index) => {
                   return (
                     <View key={index} className="flex-row items-center">

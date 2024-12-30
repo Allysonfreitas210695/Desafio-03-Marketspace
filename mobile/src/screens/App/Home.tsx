@@ -157,9 +157,9 @@ export default function Home() {
             {conditionTags.map((tag) => (
               <Tag
                 key={tag.label}
-                active={tag.active} // Usando 'undefined', 'true' ou 'false'
+                active={tag.active}
                 label={tag.label}
-                onToggle={() => handleToggleTag(tag.label)} // Chama a função de alternância ao clicar
+                onToggle={() => handleToggleTag(tag.label)}
               />
             ))}
           </View>

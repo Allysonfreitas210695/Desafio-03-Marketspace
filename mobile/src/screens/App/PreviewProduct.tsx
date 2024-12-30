@@ -64,7 +64,7 @@ export default function PreviewProduct() {
         formData.append("product_id", data.id);
         console.log(data.id);
 
-        const response = await api.post("/products/images/", formData, {
+        await api.post("/products/images/", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -94,7 +94,7 @@ export default function PreviewProduct() {
       </View>
 
       <View className="w-full h-[280] mb-6">
-        <ImageCarousel images={imageObjects} isActive />
+        <ImageCarousel images={imageObjects} />
       </View>
 
       <ScrollView
@@ -124,7 +124,6 @@ export default function PreviewProduct() {
           {product.is_new ? "NOVO" : "USADO"}
         </Text>
 
-        {/* Nome e preço do produto */}
         <View className="mx-6 mb-2 flex-row justify-between items-center">
           <Text className="font-bold text-xl text-gray-100">
             {product.name}
@@ -159,10 +158,7 @@ export default function PreviewProduct() {
 
           {product.payment_methods.map((paymentMethod) => {
             return (
-              <View
-                key={paymentMethod}
-                className="flex-row gap-2 mt-2 items-center"
-              >
+              <View key={paymentMethod} className="gap-2 mt-2 items-center">
                 <Text className="text-sm font-regular text-gray-200 ml-1">
                   {paymentMethod === "boleto" && "Boleto"}
                   {paymentMethod === "pix" && "Pix"}
